@@ -46,7 +46,7 @@ Now we are going to install few different python modules which are required
 pip3 install flask
 ```
 
-This is an ORM Object Relational Mapping which allows us to connect to a SQL database and map the entries inn SQL to a Python object so we can operate on our objects easily.
+This is an ORM Object Relational Mapping which allows us to connect to a SQL database and map the entries in SQL to a Python object so we can operate on our objects easily.
 
 ```bash
 pip3 install flask-SQLAlchemy
