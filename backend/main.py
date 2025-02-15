@@ -13,7 +13,7 @@ from models import Contact
 def get_contacts():
     contacts = Contact.query.all()
     json_contacts = list(map(lambda x: x.to_json(), contacts))
-    return jsonify({"contacts":json_contacts}), 200,
+    return jsonify({"contacts":json_contacts}), 200
 
 @app.route("/create_contacts", methods=["POST"])
 def create_contact():
@@ -21,7 +21,7 @@ def create_contact():
     last_name = request.json.get("lastName")
     email = request.json.get("email")
     if not first_name or not last_name or not email:
-        return jsonify({"message": "You must include a first name, last name and email"}), 400,
+        return (jsonify({"message": "You must include a first name, last name and email"}), 400)
 
     new_contact = Contact(first_name = first_name, last_name = last_name, email = email)
     try:
@@ -30,11 +30,11 @@ def create_contact():
     except Exception as e:
         return jsonify({"message":str(e)}), 400
 
-    return jsonify({message:"User Created!"}), 201
+    return jsonify({"message":"User Created!"}), 201
 
 @app.route("/update_contact/<int:user_id>", methods=["PATCH"])
 def update_contact(user_id):
-    contact=Contact.query.get(user_id)
+    contact = db.session.get(Contact, user_id)
 
     if not contact:
         return jsonify({"message":"User not found"}), 404
